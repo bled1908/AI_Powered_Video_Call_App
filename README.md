@@ -18,55 +18,63 @@
 
 ## 🌟 Overview
 
-FumbleWorks is a cutting-edge AI-powered video call application that revolutionizes how you conduct and manage meetings. From real-time AI assistance during calls to comprehensive post-meeting analytics, FumbleWorks provides a complete meeting experience.
+FumbleWorks is a cutting-edge AI-powered video call application built from the ground up to revolutionize how you conduct and manage meetings. This comprehensive platform provides real-time AI assistance during calls, automated summaries and transcripts through background jobs, and a complete post-call experience including video playback, transcript search, and AI chat that understands meeting context.
 
 ### ✨ Key Features
 
-🤖 **AI-Powered Video Calls** - Intelligent assistance during your meetings  
+🤖 **AI-Powered Video Calls** - Real-time intelligent assistance during meetings  
 🧠 **Custom Real-time Agents** - Tailored AI agents for specific use cases  
 📞 **Stream Video SDK** - High-quality, reliable video communication  
-💬 **Stream Chat SDK** - Integrated chat functionality  
-📝 **Summaries & Transcripts** - Automated meeting documentation  
-📂 **Meeting History** - Complete meeting management and tracking  
-🔍 **Transcript Search** - Find specific moments in your meetings  
-📺 **Video Playback** - Review meetings with synchronized transcripts  
-💬 **AI Meeting Q&A** - Ask questions about your meeting content  
-🧠 **OpenAI Integration** - Powered by advanced language models  
-💳 **Polar Subscriptions** - Flexible subscription management  
-🔐 **Better Auth** - Secure authentication system  
-📱 **Mobile Responsive** - Perfect experience on all devices  
+💬 **Stream Chat SDK** - Integrated real-time chat functionality  
+📝 **Summaries & Transcripts** - Automated meeting documentation via background jobs  
+📂 **Meeting History & Statuses** - Complete meeting management and tracking  
+🔍 **Transcript Search** - Find specific moments and topics in meetings  
+📺 **Video Playbook** - Review meetings with synchronized transcripts  
+💬 **AI Meeting Q&A** - Contextual AI chat about meeting content  
+🧠 **OpenAI Integration** - Advanced AI capabilities and analysis  
+💳 **Polar Subscriptions** - Flexible subscription and billing management  
+🔐 **Better Auth** - Secure multi-provider authentication  
+📱 **Mobile Responsive** - Optimized experience across all devices  
+🌐 **Next.js 15 + React 19** - Latest web technologies  
+🎨 **Tailwind v4 + Shadcn/ui** - Modern design system  
+⚙️ **Inngest Background Jobs** - Reliable background processing  
+🧑‍💻 **CodeRabbit PR Reviews** - AI-assisted code review workflow  
 
 ## 🚀 Tech Stack
 
 ### Frontend
-- **Next.js 15** - React framework with App Router
-- **React 19** - Latest React features and optimizations
-- **TypeScript** - Type-safe development
-- **Tailwind CSS v4** - Modern utility-first styling
-- **Shadcn/ui** - Beautiful, accessible components
+- **Next.js 15** - React framework with App Router and Server Components
+- **React 19** - Latest React with concurrent features
+- **TypeScript** - Full type safety across the application
+- **Tailwind CSS v4** - Modern utility-first CSS framework
+- **Shadcn/ui** - Beautiful, accessible component library
+- **React Hook Form** - Performant form handling with validation
+- **Zod** - TypeScript-first schema validation
 
 ### Backend & Services
-- **Stream Video SDK** - Real-time video communications
-- **Stream Chat SDK** - Messaging and chat features
-- **OpenAI API** - AI-powered features and analysis
-- **Better Auth** - Authentication and session management
-- **Drizzle ORM** - Type-safe database operations
+- **Stream Video SDK** - Enterprise-grade video communications
+- **Stream Chat SDK** - Real-time messaging and chat
+- **OpenAI API** - GPT-4 powered AI features and analysis
+- **Better Auth** - Modern authentication with multiple providers
 - **PostgreSQL** - Robust relational database
+- **Drizzle ORM** - Type-safe database operations
 
-### Infrastructure
-- **Inngest** - Background job processing
-- **Polar** - Subscription and billing management
-- **CodeRabbit** - AI-assisted code reviews
-- **Vercel** - Deployment and hosting (recommended)
+### Infrastructure & Tools
+- **Inngest** - Reliable background job processing for transcripts
+- **Polar** - Subscription management and billing
+- **CodeRabbit** - AI-powered code review automation
+- **Vercel** - Optimized deployment and hosting
+- **Lucide React** - Beautiful, consistent icons
+- **React Icons** - Extended icon library
 
 ## 📋 Prerequisites
 
-Before you begin, ensure you have the following installed:
+Before you begin, ensure you have:
 
 - **Node.js** (v18.17 or later)
 - **npm**, **yarn**, **pnpm**, or **bun**
-- **PostgreSQL** database
-- **Git**
+- **PostgreSQL** database (local or hosted)
+- **Git** for version control
 
 ## ⚡ Quick Start
 
@@ -91,43 +99,51 @@ bun install
 
 ### 3. Environment Setup
 
-Copy the environment file and configure your variables:
+Copy the environment template and configure your variables:
 
 ```bash
 cp .env.example .env.local
 ```
 
-Fill in your environment variables:
+Configure your environment variables:
 
 ```env
 # Database
 DATABASE_URL="postgresql://username:password@localhost:5432/fumbleworks"
 
-# Stream API
-STREAM_API_KEY="your_stream_api_key"
+# Stream API (Video & Chat)
+NEXT_PUBLIC_STREAM_API_KEY="your_stream_api_key"
 STREAM_SECRET="your_stream_secret"
 
 # OpenAI
 OPENAI_API_KEY="your_openai_api_key"
 
-# Polar (for subscriptions)
+# Better Auth
+BETTER_AUTH_SECRET="your_better_auth_secret"
+BETTER_AUTH_URL="http://localhost:3000"
+
+# OAuth Providers (optional)
+GOOGLE_CLIENT_ID="your_google_client_id"
+GOOGLE_CLIENT_SECRET="your_google_client_secret"
+GITHUB_CLIENT_ID="your_github_client_id"
+GITHUB_CLIENT_SECRET="your_github_client_secret"
+
+# Polar (Subscriptions)
 POLAR_ACCESS_TOKEN="your_polar_access_token"
 
-# Better Auth
-AUTH_SECRET="your_auth_secret"
-
-# Inngest
+# Inngest (Background Jobs)
 INNGEST_EVENT_KEY="your_inngest_event_key"
 INNGEST_SIGNING_KEY="your_inngest_signing_key"
 ```
 
 ### 4. Database Setup
 
-Generate and run database migrations:
+Set up your database schema:
 
 ```bash
 npm run db:generate
 npm run db:migrate
+npm run db:seed # optional: add sample data
 ```
 
 ### 5. Start Development Server
@@ -136,183 +152,318 @@ npm run db:migrate
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) to see the application.
+Open [http://localhost:3000](http://localhost:3000) to access FumbleWorks.
 
 ## 📁 Project Structure
 
 ```
 fumbleworks/
 ├── src/
-│   ├── app/                 # Next.js App Router pages
-│   │   ├── (auth)/         # Authentication routes
-│   │   ├── api/            # API routes
-│   │   └── globals.css     # Global styles
-│   ├── components/         # Reusable UI components
-│   │   └── ui/            # Shadcn/ui components
-│   ├── db/                # Database configuration
-│   │   ├── schema.ts      # Database schema
-│   │   └── index.ts       # Database connection
-│   ├── hooks/             # Custom React hooks
-│   ├── lib/               # Utility libraries
-│   │   ├── auth.ts        # Authentication configuration
-│   │   ├── auth-client.ts # Client-side auth
-│   │   └── utils.ts       # Utility functions
-│   └── modules/           # Feature modules
-│       └── auth/          # Authentication module
-├── public/                # Static assets
-├── drizzle/              # Database migrations
-├── .env.example          # Environment variables template
-├── drizzle.config.ts     # Database configuration
-├── next.config.ts        # Next.js configuration
-├── tailwind.config.ts    # Tailwind CSS configuration
-└── tsconfig.json         # TypeScript configuration
+│   ├── app/                    # Next.js 15 App Router
+│   │   ├── (auth)/            # Auth route group
+│   │   │   ├── sign-in/       # Sign in page
+│   │   │   └── sign-up/       # Sign up page
+│   │   ├── api/               # API routes
+│   │   │   ├── auth/          # Authentication endpoints
+│   │   │   ├── meetings/      # Meeting management
+│   │   │   └── webhooks/      # External service webhooks
+│   │   ├── dashboard/         # Main app dashboard
+│   │   ├── meetings/          # Meeting-related pages
+│   │   └── layout.tsx         # Root layout
+│   ├── components/            # Reusable components
+│   │   ├── ui/               # Shadcn/ui components
+│   │   ├── forms/            # Form components
+│   │   └── providers/        # Context providers
+│   ├── db/                   # Database configuration
+│   │   ├── schema.ts         # Drizzle schema definitions
+│   │   └── index.ts          # Database connection
+│   ├── hooks/                # Custom React hooks
+│   ├── lib/                  # Utility libraries
+│   │   ├── auth.ts           # Better Auth configuration
+│   │   ├── auth-client.ts    # Client-side auth utilities
+│   │   ├── stream.ts         # Stream SDK configuration
+│   │   └── utils.ts          # General utilities
+│   └── modules/              # Feature-based modules
+│       ├── auth/             # Authentication module
+│       │   └── ui/           # Auth UI components
+│       │       └── views/    # Auth view components
+│       ├── meetings/         # Meeting management
+│       └── chat/             # Chat functionality
+├── public/                   # Static assets
+│   └── logo.svg             # FumbleWorks logo
+├── drizzle/                 # Database migrations
+├── inngest/                 # Background job functions
+├── .env.example             # Environment template
+├── drizzle.config.ts        # Database configuration
+├── next.config.ts           # Next.js configuration
+├── tailwind.config.ts       # Tailwind v4 configuration
+├── components.json          # Shadcn/ui configuration
+└── tsconfig.json            # TypeScript configuration
 ```
 
 ## 🛠️ Available Scripts
 
 ```bash
 # Development
-npm run dev          # Start development server
-npm run build        # Build for production
-npm run start        # Start production server
-npm run lint         # Run ESLint
-npm run type-check   # Run TypeScript checks
+npm run dev              # Start development server with hot reload
+npm run build            # Build optimized production bundle
+npm run start            # Start production server
+npm run lint             # Run ESLint with auto-fix
+npm run type-check       # TypeScript type checking
 
-# Database
-npm run db:generate  # Generate database migrations
-npm run db:migrate   # Run database migrations
-npm run db:push      # Push schema changes
-npm run db:studio    # Open Drizzle Studio
+# Database Operations
+npm run db:generate      # Generate new migrations
+npm run db:migrate       # Apply pending migrations
+npm run db:push          # Push schema changes directly
+npm run db:studio        # Open Drizzle Studio (database GUI)
+npm run db:seed          # Seed database with sample data
+
+# Background Jobs
+npm run inngest:dev      # Start Inngest development server
+
+# Testing & Quality
+npm run test             # Run test suite
+npm run test:watch       # Run tests in watch mode
+npm run test:coverage    # Generate test coverage report
 ```
 
 ## 🔧 Configuration
 
 ### Authentication Setup
 
-FumbleWorks uses Better Auth for secure authentication. Configure your auth settings in [`src/lib/auth.ts`](src/lib/auth.ts):
+FumbleWorks uses Better Auth for comprehensive authentication:
 
 ```typescript
+// src/lib/auth.ts
 export const auth = betterAuth({
+  database: drizzleAdapter(db, {
+    provider: "pg",
+    schema: authSchema,
+  }),
   emailAndPassword: {
     enabled: true,
+    requireEmailVerification: true,
   },
-  database: drizzleAdapter(db, {
-    provider: "pg", 
-    schema: {
-      ...schema,
+  socialProviders: {
+    google: {
+      clientId: process.env.GOOGLE_CLIENT_ID!,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     },
-  }),
+    github: {
+      clientId: process.env.GITHUB_CLIENT_ID!,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET!,
+    },
+  },
 });
 ```
 
-### Stream Configuration
+### Stream Video & Chat Configuration
 
-Set up your Stream Video and Chat SDKs with your API credentials in the environment variables.
+Configure Stream services for video calls and real-time chat:
 
-### OpenAI Integration
+```typescript
+// Client-side Stream configuration
+const streamClient = new StreamVideoClient({
+  apiKey: process.env.NEXT_PUBLIC_STREAM_API_KEY!,
+  user: currentUser,
+  token: streamUserToken,
+});
+```
 
-Configure OpenAI for AI-powered features by adding your API key to the environment variables.
+### AI Integration
+
+OpenAI powers the intelligent features:
+
+```typescript
+// AI service configuration
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
+```
 
 ## 🚀 Deployment
 
 ### Deploy on Vercel (Recommended)
 
-1. Push your code to GitHub
-2. Connect your repository to [Vercel](https://vercel.com)
-3. Configure environment variables in Vercel dashboard
-4. Deploy automatically on every push to main branch
+1. **Prepare Repository**
+   ```bash
+   git add .
+   git commit -m "Ready for deployment"
+   git push origin main
+   ```
 
-### Environment Variables for Production
+2. **Deploy to Vercel**
+   - Connect your GitHub repository to [Vercel](https://vercel.com)
+   - Configure environment variables in the Vercel dashboard
+   - Deploy automatically with every push to main
 
-Ensure all environment variables are properly set in your production environment:
+3. **Production Environment Variables**
+   - Set all environment variables from `.env.example`
+   - Configure production database URL
+   - Set up production Stream API keys
+   - Configure OAuth app credentials for production domain
 
-- Database connection string
-- Stream API credentials
-- OpenAI API key
-- Authentication secrets
-- Subscription service credentials
+### Database Setup for Production
+
+Ensure your production database is properly configured:
+
+```bash
+# Run migrations in production
+npm run db:migrate
+```
 
 ## 🧪 Testing
 
 ```bash
-# Run tests
+# Run all tests
 npm run test
-
-# Run tests in watch mode
-npm run test:watch
 
 # Run tests with coverage
 npm run test:coverage
+
+# Run specific test files
+npm run test -- auth.test.ts
+
+# Run tests in watch mode during development
+npm run test:watch
 ```
 
 ## 📚 API Documentation
 
 ### Authentication Endpoints
 
-- `POST /api/auth/sign-up` - User registration
-- `POST /api/auth/sign-in` - User login
+- `POST /api/auth/sign-up` - User registration with email/password
+- `POST /api/auth/sign-in` - User authentication
 - `POST /api/auth/sign-out` - User logout
+- `GET /api/auth/session` - Get current session
+- `POST /api/auth/callback/google` - Google OAuth callback
+- `POST /api/auth/callback/github` - GitHub OAuth callback
 
-### Meeting Endpoints
+### Meeting Management
 
-- `GET /api/meetings` - List user meetings
-- `POST /api/meetings` - Create new meeting
-- `GET /api/meetings/[id]` - Get meeting details
-- `POST /api/meetings/[id]/transcript` - Generate transcript
+- `GET /api/meetings` - List user meetings with pagination
+- `POST /api/meetings` - Create new meeting room
+- `GET /api/meetings/[id]` - Get meeting details and participants
+- `PUT /api/meetings/[id]` - Update meeting settings
+- `POST /api/meetings/[id]/join` - Join meeting room
+- `POST /api/meetings/[id]/leave` - Leave meeting room
+
+### AI Features
+
+- `POST /api/meetings/[id]/transcript` - Generate meeting transcript
+- `POST /api/meetings/[id]/summary` - Create AI meeting summary
+- `POST /api/ai/chat` - Chat with AI about meeting content
+- `GET /api/meetings/[id]/insights` - Get AI-generated insights
 
 ## 🤝 Contributing
 
-We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
+We welcome contributions to FumbleWorks! Please follow our contribution guidelines:
 
 ### Development Workflow
 
-1. Fork the repository
-2. Create a feature branch: `git checkout -b feature/amazing-feature`
-3. Make your changes
-4. Run tests: `npm run test`
-5. Commit your changes: `git commit -m 'Add amazing feature'`
-6. Push to the branch: `git push origin feature/amazing-feature`
-7. Open a Pull Request
+1. **Fork the repository**
+2. **Create a feature branch**
+   ```bash
+   git checkout -b feature/amazing-feature
+   ```
+3. **Make your changes with proper testing**
+4. **Run quality checks**
+   ```bash
+   npm run lint
+   npm run type-check
+   npm run test
+   ```
+5. **Commit with conventional commits**
+   ```bash
+   git commit -m "feat: add amazing feature"
+   ```
+6. **Push and create Pull Request**
+   ```bash
+   git push origin feature/amazing-feature
+   ```
 
-### Code Review Process
+### Code Standards
 
-- All PRs are automatically reviewed by CodeRabbit AI
-- Manual review by maintainers
-- Ensure all tests pass
-- Follow our coding standards
+- Follow TypeScript best practices
+- Use Prettier for code formatting
+- Write comprehensive tests for new features
+- Follow component composition patterns
+- Use proper error handling and loading states
+
+### AI-Assisted Code Review
+
+All pull requests are automatically reviewed by CodeRabbit AI for:
+- Code quality and best practices
+- Security vulnerabilities
+- Performance optimizations
+- TypeScript type safety
 
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🙋‍♂️ Support
+## 🙋‍♂️ Support & Contact
 
-- 📧 Email: support@fumbleworks.com
-- 💬 Discord: [Join our community](https://discord.gg/fumbleworks)
-- 📖 Documentation: [docs.fumbleworks.com](https://docs.fumbleworks.com)
-- 🐛 Issues: [GitHub Issues](https://github.com/yourusername/fumbleworks/issues)
+Need help with FumbleWorks? We're here to assist you:
+
+- 📧 **Email**: [bled19082005@gmail.com](mailto:bled19082005@gmail.com)
+- 🐛 **Bug Reports**: [GitHub Issues](https://github.com/yourusername/fumbleworks/issues)
+- 💡 **Feature Requests**: [GitHub Discussions](https://github.com/yourusername/fumbleworks/discussions)
+- 📖 **Documentation**: Check our comprehensive docs above
+
+For technical support, please include:
+- Node.js and npm versions
+- Operating system details
+- Error messages and logs
+- Steps to reproduce the issue
 
 ## 🎯 Roadmap
 
-- [ ] **Q1 2024**: Advanced AI agent customization
-- [ ] **Q2 2024**: Multi-language transcript support
-- [ ] **Q3 2024**: Integration with popular calendar apps
-- [ ] **Q4 2024**: Advanced analytics and insights
+### Phase 1 - Core Platform ✅
+- [x] Real-time video calls with Stream SDK
+- [x] Authentication with Better Auth
+- [x] Basic meeting management
+- [x] Mobile responsive design
+
+### Phase 2 - AI Integration 🚧
+- [x] OpenAI-powered transcriptions
+- [x] AI meeting summaries
+- [ ] Advanced AI chat with meeting context
+- [ ] Custom AI agent personalities
+
+### Phase 3 - Enhanced Features 📅
+- [ ] Advanced transcript search with vector embeddings
+- [ ] Multi-language support for transcripts
+- [ ] Calendar integrations (Google, Outlook)
+- [ ] Advanced meeting analytics and insights
+
+### Phase 4 - Enterprise Features 📅
+- [ ] Team workspaces and roles
+- [ ] Advanced subscription tiers
+- [ ] API for third-party integrations
+- [ ] White-label solutions
 
 ## 🌟 Acknowledgments
 
-- [Stream](https://getstream.io/) for video and chat infrastructure
-- [OpenAI](https://openai.com/) for AI capabilities
-- [Vercel](https://vercel.com/) for hosting and deployment
-- [Shadcn/ui](https://ui.shadcn.com/) for beautiful components
+Special thanks to the amazing tools and services that make FumbleWorks possible:
+
+- **[Stream](https://getstream.io/)** - For robust video and chat infrastructure
+- **[OpenAI](https://openai.com/)** - For powerful AI capabilities
+- **[Vercel](https://vercel.com/)** - For seamless deployment and hosting
+- **[Shadcn/ui](https://ui.shadcn.com/)** - For beautiful, accessible components
+- **[Better Auth](https://www.better-auth.com/)** - For modern authentication
+- **[Drizzle ORM](https://orm.drizzle.team/)** - For type-safe database operations
 
 ---
 
 <div align="center">
-  <p>Built with ❤️ by the FumbleWorks team</p>
+  <p>Built with ❤️ for the future of video communications</p>
   <p>
-    <a href="https://fumbleworks.com">Website</a> •
-    <a href="https://twitter.com/fumbleworks">Twitter</a> •
-    <a href="https://linkedin.com/company/fumbleworks">LinkedIn</a>
+    <strong>FumbleWorks</strong> - Where AI meets video calls
+  </p>
+  <p>
+    <a href="mailto:bled19082005@gmail.com">Contact</a> •
+    <a href="https://github.com/yourusername/fumbleworks">GitHub</a> •
+    <a href="https://fumbleworks.com">Website</a>
   </p>
 </div>
