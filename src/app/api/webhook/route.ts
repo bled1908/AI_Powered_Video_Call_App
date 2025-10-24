@@ -44,7 +44,7 @@ export async function POST(req: NextRequest) {
     let payload: unknown;
     try {
         payload = JSON.parse(body) as Record<string, unknown>;
-    } catch (error) {
+    } catch {
         return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
     }
 

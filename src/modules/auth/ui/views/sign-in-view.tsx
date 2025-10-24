@@ -9,6 +9,7 @@ import { OctagonAlertIcon } from "lucide-react";
 import { FaGithub, FaGoogle } from "react-icons/fa";
 import { zodResolver } from "@hookform/resolvers/zod";
 
+import Image from "next/image";
 import { Input } from "@/components/ui/input";
 import { authClient } from "@/lib/auth-client";
 import { Button } from "@/components/ui/button";
@@ -188,7 +189,14 @@ export const SignInView = () => {
                     </Form>
 
                     <div className="bg-radial from-sidebar-accent to-sidebar relative hidden md:flex flex-col gap-y-4 items-center justify-center">
-                        <img src="/logo.svg" alt="Image" className="h-[92px] w-[92px]" />
+                        <Image
+                            src="/logo.svg"
+                            alt="Image"
+                            width={92}
+                            height={92}
+                            className="h-[92px] w-[92px]"
+                            priority
+                        />
                         <p className="text-2xl font-semibold text-white">
                             FumbleWorks
                         </p>
