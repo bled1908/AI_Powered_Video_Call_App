@@ -14,6 +14,9 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "FumbleWorks",
   description: "AI Powered Video Call App",
+  icons: {
+    icon: "/logo.svg",
+  },
 };
 
 export default function RootLayout({
